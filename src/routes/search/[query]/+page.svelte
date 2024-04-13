@@ -32,6 +32,13 @@
     let maxPage = Math.ceil(data.results / 100);
 
     function navigate(page: number) {
+    if (page > 5) {
+        let userConfirmation = window.confirm("You are navigating to a page number greater than 5. Developer API key doesn't allow querying those. Do you wish to continue?");
+        if (!userConfirmation) {
+            return; // If user cancels navigation, we return from the function
+        }
+    }
+
     currentPage = page;
     // Get the current URL
     let url = new URL(window.location.href);
@@ -43,7 +50,7 @@
     // Update the URL's search parameters
     url.search = params.toString();
     goto(url.toString())
-    }
+}
 </script>
 
 <svelte:head>
@@ -83,7 +90,7 @@
                 <ul class="flex">
                     <li><button class="h-full w-full" on:click={() => navigate(1)}>1</button></li>
                     {#if currentPage > 3}
-                    <li>...</li>
+                    <li class="!pointer-events-none"><button>...</button></li>
                     {/if}
                     {#if currentPage > 2}
                     <li><button on:click={() => navigate(currentPage - 1)}>{currentPage - 1}</button></li>
@@ -95,7 +102,7 @@
                     <li><button on:click={() => navigate(currentPage + 1)}>{currentPage + 1}</button></li>
                     {/if}
                     {#if currentPage < maxPage - 2}
-                    <li><button>...</button></li>
+                    <li class="!pointer-events-none"><button>...</button></li>
                     {/if}
                     {#if maxPage !== 1}
                     <li><button on:click={() => navigate(maxPage)}>{maxPage}</button></li>

@@ -24,10 +24,9 @@ This is a SvelteKit-based web application that fetches news articles from a news
 ```bash
 git clone https://github.com/NikoJunttila/uutiset.git
 #Navigate to the project directory:
-
 cd uutiset
-#Install the dependencies:
 
+#Install the dependencies:
 npm install
 ```
 Create a .env file in the root directory and add your news API key:

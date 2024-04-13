@@ -11,6 +11,12 @@
 		}
 		return check;
 	}
+	function checkNullContent(check: string | null) {
+		if (check === null || check === '') {
+			return 'no description available';
+		}
+		return check;
+	}
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
@@ -56,10 +62,10 @@
 		</header>
 		<div class="p-4 space-y-4">
 			<h6 class="h6" data-toc-ignore>Source: {checkNull(art.source.name)}</h6>
-			<h3 class="h3" data-toc-ignore>{art.title}</h3>
+			<h3 class="h3" data-toc-ignore>{checkNullContent(art.title)}</h3>
 			<article>
 				<p class="line-clamp-3">
-					{art.description}
+					{checkNullContent(art.description)}
 				</p>
 			</article>
 		</div>

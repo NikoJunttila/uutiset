@@ -6,6 +6,8 @@
 	import BigArticle from '$lib/BigArticle.svelte';
 	import { goto } from '$app/navigation';
 	import booleanStore from '$lib/store';
+	import { onMount } from 'svelte';
+	import { countriesMap } from '$lib/countries';
 	export let data: PageData;
 
 	let selectedCategory = '';
@@ -48,6 +50,16 @@
 		booleanStore.set(true)
 		activeArt = a
 	}
+	let country : string = ""
+	onMount(() => {
+		for (let i=0;i<countriesMap.length;i++){
+			if (countriesMap[i][0] == data.props.country){
+				country = countriesMap[i][1]
+				console.log(countriesMap[i][1])
+				console.log(country)
+			}
+		}
+	})
 </script>
 
 <svelte:head>
@@ -58,8 +70,8 @@
 	<div class="text-2xl py-3 text-center">
 		<div>
 			Currently showing top {data.props.news.length} 
-			{#if data.props.country}
-			news at <span class="uppercase">{data.props.country}</span>
+			{#if country}
+			news at <span class="capitalize">{country}</span>
 			{/if}
 			{#if data.props.category !== ''}
 				for category:
@@ -68,16 +80,17 @@
 		</div>
 		<form on:submit|preventDefault={handleSubmit} class="pt-2 gap-1 flex flex-col items-center">
 			<p class="text-sm">Select atleast one option</p>
-			<div class="flex items-center flex-col md:flex-row gap-4">
-			country: <SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
-				<p>category:</p>
-				<select class="select variant-form-material" bind:value={selectedCategory}>
+			<div class="mx-2 grid grid-cols-2 grid-rows-2 md:flex items-center flex-col md:flex-row gap-4">
+			 <SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
+			<select class="select variant-form-material" bind:value={selectedCategory}>
 					<option value="" disabled selected>Select category</option>
 					{#each categories as category}
 					<option value={category}>{category}</option>
 					{/each}
-				</select>
-				<button type="submit" class="btn variant-filled">Search</button>
+			</select>
+			<div class="grid div1  place-items-center">
+				<button type="submit" class="w-full btn variant-filled">Search</button>
+			</div>
 			</div>
 		</form>
 	</div>
@@ -93,3 +106,6 @@
 		No results for this query
 	{/if}
 </div>
+<style>
+	.div1 { grid-area: 2 / 1 / 3 / 3; }
+</style>

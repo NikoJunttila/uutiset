@@ -18,7 +18,8 @@
 		'health',
 		'science',
 		'sports',
-		'technology'
+		'technology',
+		''
 	];
 	//value from selectdown component
 	let selectedCountry = '';
@@ -27,16 +28,22 @@
 	}
 	//change options
 	function handleSubmit() {
-		let url = `?`
+		let url = `?`;
 		let cateQuery = `category=${selectedCategory}`;
-		if (selectedCountry){
-			url += `country=${selectedCountry}`
+		if (selectedCountry) {
+			let shorthand: string = '';
+			for (let i = 0; i < countriesMap.length; i++) {
+				if (countriesMap[i][1] == selectedCountry) {
+					shorthand = countriesMap[i][0];
+				}
+			}
+			url += `country=${shorthand}`;
 		}
 		if (selectedCategory) {
-			if (selectedCountry){
-				url += "&"
+			if (selectedCountry) {
+				url += '&';
 			}
-			url += cateQuery 
+			url += cateQuery;
 		}
 		goto(url);
 	}
@@ -45,21 +52,21 @@
 	booleanStore.subscribe((v) => {
 		value = v;
 	});
-	let activeArt : Article
-	function bigSet(a : Article){
-		booleanStore.set(true)
-		activeArt = a
+	let activeArt: Article;
+	function bigSet(a: Article) {
+		booleanStore.set(true);
+		activeArt = a;
 	}
-	let country : string = ""
+	let country: string = '';
 	onMount(() => {
-		for (let i=0;i<countriesMap.length;i++){
-			if (countriesMap[i][0] == data.props.country){
-				country = countriesMap[i][1]
-				console.log(countriesMap[i][1])
-				console.log(country)
+		for (let i = 0; i < countriesMap.length; i++) {
+			if (countriesMap[i][0] == data.props.country) {
+				country = countriesMap[i][1];
+				console.log(countriesMap[i][1]);
+				console.log(country);
 			}
 		}
-	})
+	});
 </script>
 
 <svelte:head>
@@ -69,9 +76,9 @@
 <div class="w-screen flex items-center justify-center flex-col">
 	<div class="text-2xl py-3 text-center">
 		<div>
-			Currently showing top {data.props.news.length} 
+			Currently showing top {data.props.news.length}
 			{#if country}
-			news at <span class="capitalize">{country}</span>
+				news at <span class="capitalize">{country}</span>
 			{/if}
 			{#if data.props.category !== ''}
 				for category:
@@ -80,32 +87,37 @@
 		</div>
 		<form on:submit|preventDefault={handleSubmit} class="pt-2 gap-1 flex flex-col items-center">
 			<p class="text-sm">Select atleast one option</p>
-			<div class="mx-2 grid grid-cols-2 grid-rows-2 md:flex items-center flex-col md:flex-row gap-4">
-			 <SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
-			<select class="select variant-form-material" bind:value={selectedCategory}>
+			<div
+				class="mx-2 grid grid-cols-2 grid-rows-2 md:flex items-center flex-col md:flex-row gap-4"
+			>
+				<SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
+				<select class="select variant-form-material" bind:value={selectedCategory}>
 					<option value="" disabled selected>Select category</option>
 					{#each categories as category}
-					<option value={category}>{category}</option>
+						<option value={category}>{category}</option>
 					{/each}
-			</select>
-			<div class="grid div1  place-items-center">
-				<button type="submit" class="w-full btn variant-filled">Search</button>
-			</div>
+				</select>
+				<div class="grid div1 place-items-center">
+					<button type="submit" class="w-full btn variant-filled">Search</button>
+				</div>
 			</div>
 		</form>
 	</div>
 	{#if data.props.news.length > 0}
 		<div class="grid-container mx-3 md:mx-7">
 			{#each data.props.news as art}
-			<button on:click={() => bigSet(art)}>
-				<ArticleComponent {art} />
-			</button>
+				<button on:click={() => bigSet(art)}>
+					<ArticleComponent {art} />
+				</button>
 			{/each}
 		</div>
 	{:else}
 		No results for this query
 	{/if}
 </div>
+
 <style>
-	.div1 { grid-area: 2 / 1 / 3 / 3; }
+	.div1 {
+		grid-area: 2 / 1 / 3 / 3;
+	}
 </style>

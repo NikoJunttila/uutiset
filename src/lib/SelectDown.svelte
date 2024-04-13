@@ -7,6 +7,6 @@
 <input list="countries" class="select variant-form-material" bind:value={selectedCountry} placeholder="Select Country">
 <datalist id="countries">
   {#each countries as [code, name]}
-    <option value={code}>{name}</option>
+    <option value={name}>{code}</option>
   {/each}
 </datalist>

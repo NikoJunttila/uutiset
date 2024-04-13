@@ -2,15 +2,28 @@
 	import '../app.postcss';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { storePopup } from '@skeletonlabs/skeleton';
+	import booleanStore from '$lib/store';
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+	import { goto } from '$app/navigation';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 	let qValue: string = '';
+	//route user to keywords articles
 	function handleSubmit() {
-		window.location.href = `/search/${qValue}`;
+		goto(`/search/${qValue}`);
 	}
 	let y: any;
+	let value;
+	booleanStore.subscribe((v) => {
+		value = v;
+	});
+	//check escape key and close big article
+	function close(e : any){
+		if (e.keyCode === 27) {
+			booleanStore.set(false)
+			console.log("closed")
+		}
+	}
 </script>
-
 <div class="min-h-screen">
 	<header
 		class="{y > 50
@@ -55,4 +68,4 @@
 		></a
 	>
 </footer>
-<svelte:window bind:scrollY={y} />
+<svelte:window bind:scrollY={y} on:keydown={close}/>

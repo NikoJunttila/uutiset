@@ -16,7 +16,7 @@ This is a SvelteKit-based web application that fetches news articles from a news
 ### Prerequisites
 
 - Node.js (version 18.13 or higher)
-
+download here: https://nodejs.org/en/download
 ### Installation
 
 1. Clone the repository:
@@ -31,7 +31,7 @@ npm install
 ```
 Create a .env file in the root directory and add your news API key:
 example.env shows how the .env file should look like
-
+get API key here: https://newsapi.org/
 Start the development server:
 
 ```bash

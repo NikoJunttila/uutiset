@@ -1,14 +1,13 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import SelectDown from '$lib/SelectDown.svelte';
-	import Article from '$lib/Article.svelte';
-	import { onMount } from 'svelte';
+	import ArticleComponent from '$lib/ArticleComponent.svelte';
+	import type { Article } from '$lib/index';
+	import BigArticle from '$lib/BigArticle.svelte';
 	import { goto } from '$app/navigation';
+	import booleanStore from '$lib/store';
 	export let data: PageData;
 
-	onMount(() => {
-		console.log(data)
-	})
 	let selectedCategory = '';
 	const categories = [
 		'business',
@@ -19,11 +18,12 @@
 		'sports',
 		'technology'
 	];
+	//value from selectdown component
 	let selectedCountry = '';
-
 	function handleSelectedCountry(event: any) {
 		selectedCountry = event.target.value;
 	}
+	//change options
 	function handleSubmit() {
 		let url = `?`
 		let cateQuery = `category=${selectedCategory}`;
@@ -38,11 +38,22 @@
 		}
 		goto(url);
 	}
+	//big article store stuff
+	let value;
+	booleanStore.subscribe((v) => {
+		value = v;
+	});
+	let activeArt : Article
+	function bigSet(a : Article){
+		booleanStore.set(true)
+		activeArt = a
+	}
 </script>
 
 <svelte:head>
 	<title>news for {data.props.country}</title>
 </svelte:head>
+<BigArticle art={activeArt} />
 <div class="w-screen flex items-center justify-center flex-col">
 	<div class="text-2xl py-3 text-center">
 		<div>
@@ -73,7 +84,9 @@
 	{#if data.props.news.length > 0}
 		<div class="grid-container mx-3 md:mx-7">
 			{#each data.props.news as art}
-				<Article {art} />
+			<button on:click={() => bigSet(art)}>
+				<ArticleComponent {art} />
+			</button>
 			{/each}
 		</div>
 	{:else}

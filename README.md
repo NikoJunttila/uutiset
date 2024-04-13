@@ -54,7 +54,7 @@ SvelteKit,
 Svelte,
 TypeScript,
 Tailwind CSS (for styling),
-Skeleton (toolkit for svelte)<br>
+Skeleton (UI toolkit for svelte)<br>
 newsAPI: https://newsapi.org/
 
 ## Building

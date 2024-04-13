@@ -56,7 +56,7 @@
 			{/if}
 		</div>
 		<form on:submit|preventDefault={handleSubmit} class="pt-2 gap-1 flex flex-col items-center">
-			<p>select atleast one</p>
+			<p class="text-sm">Select atleast one option</p>
 			<div class="flex items-center gap-4">
 			country: <SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
 				<p>category:</p>

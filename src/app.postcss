@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+html{
+    @apply overflow-x-hidden
+}
+li > {
+
+}
+li>button{
+  padding: 0.7em 1.6em;
+  font-weight: 400;
+  text-align: center;
+  @apply variant-outline-secondary
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+  .show2 {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: translateX(0) !important;
+  }

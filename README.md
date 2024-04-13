@@ -1,6 +1,7 @@
 # News App
-
+<a href="https://uutiset-eight.vercel.app/">Live version here </a><br>
 This is a SvelteKit-based web application that fetches news articles from a news API and displays them in a user-friendly interface.
+
 
 ## Features
 
@@ -50,11 +51,11 @@ To search for news articles, enter a keyword in the search bar and press Enter.
 Use the pagination controls at the bottom and top of the page to navigate through additional pages of news articles.
 
 Technologies Used
-SvelteKit
-Svelte
-TypeScript
-Tailwind CSS (for styling)
-Skeleton (toolkit for svelte)
+SvelteKit,
+Svelte,
+TypeScript,
+Tailwind CSS (for styling),
+Skeleton (toolkit for svelte)<br>
 newsAPI: https://newsapi.org/
 
 ## Building

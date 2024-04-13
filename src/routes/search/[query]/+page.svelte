@@ -85,9 +85,9 @@
         </div>
         {#if data.queriedNews.length > 0}
         <div class="flex flex-col justify-center items-center gap-1 mt-4">
-            <div class="flex gap-3 ">
-                <button class="btn variant-outline-secondary variant-filled " on:click={() => navigate(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                <ul class="flex">
+            <div class="flex gap-3 parent">
+                <button class="btn variant-outline-secondary variant-filled div1" on:click={() => navigate(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                <ul class="flex div3">
                     <li><button class="h-full w-full" on:click={() => navigate(1)}>1</button></li>
                     {#if currentPage > 3}
                     <li class="!pointer-events-none"><button>...</button></li>
@@ -108,12 +108,12 @@
                     <li><button on:click={() => navigate(maxPage)}>{maxPage}</button></li>
                     {/if}
                 </ul>
-                <button class="btn variant-outline-secondary variant-filled " on:click={() => navigate(currentPage + 1)} disabled={currentPage === maxPage}>Next</button>
+                <button class="btn variant-outline-secondary variant-filled div2" on:click={() => navigate(currentPage + 1)} disabled={currentPage === maxPage}>Next</button>
             </div>
             <p>Current Page: {currentPage}</p>
         </div>
 	
-		<div class="grid-container m-7">
+		<div class="grid-container mx-3 md:mx-7">
 			{#each data.queriedNews as art}
 				<Article {art} />
 			{/each}
@@ -149,5 +149,19 @@
 	{:else}
 		No results for this query
 	{/if}
-  
 </div>
+<style>
+@media (max-width: 600px){
+
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 2 / 2; }
+    .div2 { grid-area: 1 / 2 / 2 / 3; }
+    .div3 { grid-area: 2 / 1 / 3 / 3; }
+}   
+</style>

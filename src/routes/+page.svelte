@@ -57,7 +57,7 @@
 		</div>
 		<form on:submit|preventDefault={handleSubmit} class="pt-2 gap-1 flex flex-col items-center">
 			<p class="text-sm">Select atleast one option</p>
-			<div class="flex items-center gap-4">
+			<div class="flex items-center flex-col md:flex-row gap-4">
 			country: <SelectDown bind:selectedCountry on:change={handleSelectedCountry} />
 				<p>category:</p>
 				<select class="select variant-form-material" bind:value={selectedCategory}>
@@ -71,7 +71,7 @@
 		</form>
 	</div>
 	{#if data.props.news.length > 0}
-		<div class="grid-container mx-7">
+		<div class="grid-container mx-3 md:mx-7">
 			{#each data.props.news as art}
 				<Article {art} />
 			{/each}

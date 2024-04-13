@@ -8,6 +8,7 @@ export const load: PageServerLoad = async ({ url }) => {
     let country = url.searchParams.get('country') || ''; // default to 'us' if not provided
     const category = url.searchParams.get('category') || '';
     let search = `https://newsapi.org/v2/top-headlines?apiKey=${SECRET_API}`;
+    let news;
     if(country) {
       search += `&country=${country}`;
     }
@@ -46,7 +47,7 @@ export const load: PageServerLoad = async ({ url }) => {
         });
       }
       //get rid of some null articles //edit. got rid of too many articles. oopsie
-      const news = rawNews.articles.filter(article => article.content !== "[Removed]");
+      news = rawNews.articles.filter(article => article.content !== "[Removed]");
     } catch (e){
       if (typeof e === 'object' && e !== null && 'status' in e && 'code' in e && 'message' in e) {
         error(429, {

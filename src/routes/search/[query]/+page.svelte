@@ -80,9 +80,10 @@
 	</div>
 
 	<button class="btn variant-filled" use:popup={popupFeatured}>Filters</button>
+
 	<div class="card p-4 z-20" data-popup="popupFeatured">
 		<form on:submit|preventDefault={sendOptions} class="flex flex-col gap-3">
-			<div class="flex gap-3 items-center justify-center">
+			<div class="flex flex-col sm:flex-row gap-3 items-center justify-center">
 				<span>From: </span><DateInput
 					bind:value={dateFrom}
 					placeholder="2000/31/12 23:59:59"
@@ -103,6 +104,8 @@
 		</form>
 		<div class="arrow variant-filled-primary" />
 	</div>
+
+
 	{#if data.queriedNews.length > 0}
 		<div class="flex flex-col justify-center items-center gap-1 mt-4">
 			<div class="flex gap-3 parent">

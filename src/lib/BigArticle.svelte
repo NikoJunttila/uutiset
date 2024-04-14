@@ -54,7 +54,7 @@
 				<h6 class="h6" data-toc-ignore>Source: {checkNull(art.source.name)}</h6>
 				<h3 class="h3" data-toc-ignore>{art.title}</h3>
 				<article>
-					{art.content}
+					{checkNull(art.content)}
 				</article>
 				<div class="grid items-center">
 					<a class=" btn variant-filled-primary" target="_blank" href={art.url}>Link to article</a>

@@ -20,7 +20,6 @@
 	function close(e : any){
 		if (e.keyCode === 27) {
 			booleanStore.set(false)
-			console.log("closed")
 		}
 	}
 </script>
@@ -37,7 +36,7 @@
 					<label class="ml-2 sm:ml-0 text-sm sm:text-base" for="query"
 						>Search news with keywords</label
 					>
-					<input required class="input" type="text" bind:value={qValue} name="query" placeholder="search" />
+					<input required class="input" type="text" bind:value={qValue} name="query" placeholder="Enter your search query" />
 					<button type="submit" class="btn variant-filled">Search</button>
 				</div>
 			</div>
@@ -46,7 +45,7 @@
 			<LightSwitch />
 		</div>
 	</header>
-	<main class="pt-24">
+	<main class="pt-28 sm:pt-24">
 		<slot />
 	</main>
 </div>

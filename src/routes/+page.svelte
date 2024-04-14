@@ -62,8 +62,6 @@
 		for (let i = 0; i < countriesMap.length; i++) {
 			if (countriesMap[i][0] == data.props.country) {
 				country = countriesMap[i][1];
-				console.log(countriesMap[i][1]);
-				console.log(country);
 			}
 		}
 	});
